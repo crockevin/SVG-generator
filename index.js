@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const { Circle, Triangle, Square } = require('./lib/shapes');
 
-const questions = [
+const questions = [//questions
     {
         type: 'input',
         message: 'Enter 3 characters or less',
@@ -27,11 +27,11 @@ const questions = [
     }
 ]
 
-function makeSvg(text, textColor, shape, shapeColor){
+function makeSvg(text, textColor, shape, shapeColor){//gets string for svg file
     switch (shape) {
         case 'circle':
-            const newCircle = new Circle(text, textColor, shapeColor)
-            return newCircle.render()
+            const newCircle = new Circle(text, textColor, shapeColor)//makes new circle object
+            return newCircle.render()//returns the svg string
             break;
         case 'triangle':
             const newTriangle = new Triangle(text, textColor, shapeColor)
@@ -45,18 +45,18 @@ function makeSvg(text, textColor, shape, shapeColor){
 }
 
 function start() {
-    inquirer.prompt(questions)
+    inquirer.prompt(questions)//loads question for users
         .then((answers) => {
-            const { text, textColor, shape, shapeColor } = answers
-            const svg = makeSvg(text, textColor, shape, shapeColor)
-            fs.writeFile('./examples/logo.svg', svg, (err) => {
+            const { text, textColor, shape, shapeColor } = answers//breaks a part answers
+            const svg = makeSvg(text, textColor, shape, shapeColor)// calls makeSvg with arguements
+            fs.writeFile('./examples/logo.svg', svg, (err) => {//writes svg file
                 if(err){
                     console.log(err)
                 }
-                console.log('good')
+                console.log('File created')
             })
         })
 }
 
 
-start()
+start()//inital start
